@@ -10,9 +10,9 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 
 # langsmith
-# from langsmith import traceable
 os.environ["LANGSMITH_API_KEY"] = st.secrets['LANGSMITH_API_KEY']
 os.environ["LANGSMITH_TRACING"] = "true"
+os.environ["LANGSMITH_PROJECT"] = 'rubber-ducky'
 
 ### -------- SESSION STATE ---------
 if 'memories' not in st.session_state:
