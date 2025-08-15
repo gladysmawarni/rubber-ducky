@@ -2,7 +2,7 @@ import os
 import warnings
 import streamlit as st
 import time
-from PIL import Image
+# from PIL import Image
 
 # langchain libraries
 from langchain_community.vectorstores import FAISS
