@@ -9,6 +9,11 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 
+# langsmith
+# from langsmith import traceable
+os.environ["LANGSMITH_API_KEY"] = st.secrets['LANGSMITH_API_KEY']
+os.environ["LANGSMITH_TRACING"] = "true"
+
 ### -------- SESSION STATE ---------
 if 'memories' not in st.session_state:
     st.session_state.memories = []
@@ -47,6 +52,7 @@ def get_context(preference):
 
 
 # function to ask llm model question and generate answer
+# @traceable()
 def generate_response(context, query) -> str:
     with st.spinner('Thinking...'):
         # Define the role of the assistant and prepare the prompt
@@ -69,7 +75,7 @@ def generate_response(context, query) -> str:
         )
         prompt = TEMPLATE.format(chat_history= st.session_state.memories, context= context, query=query)
 
-        model = ChatOpenAI(model="gpt-4o-mini")
+        model = ChatOpenAI(model="gpt-5-nano")
         response_text = model.invoke(prompt).content
         st.session_state.memories.append({"role": "assistant", "content": response_text})
 
